@@ -7,11 +7,11 @@
 
 import UIKit
 
-final class CityWeatherDetailsViewController<ViewModel>: UIViewController where ViewModel: CityWeatherDetailsViewModelProtocol {
+final class CityWeatherDetailsViewController: UIViewController {
     
-    private let viewModel: ViewModel
+    private let viewModel: CityWeatherDetailsViewModelProtocol
     
-    init(viewModel: ViewModel) {
+    init(viewModel: CityWeatherDetailsViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: CityWeatherDetailsViewController.nibName,
                    bundle: nil)
@@ -23,7 +23,11 @@ final class CityWeatherDetailsViewController<ViewModel>: UIViewController where 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        prepareViews()
     }
 
+    private func prepareViews() {
+//        viewModel.delegate = self
+        navigationItem.title = viewModel.title
+    }
 }

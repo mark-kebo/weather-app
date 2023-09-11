@@ -15,7 +15,8 @@ extension Data {
         } catch (let error) {
             let errorMessage = "Can't parse Data for \(T.self) type: \(error)"
             NSLog(errorMessage)
-            return .failure(.objectParsing())
+            guard let parsedErrorObject = try? JSONDecoder().decode(ApiError.self, from: self) else { return .failure(.objectParsing()) }
+            return .failure(.network(parsedErrorObject.message))
         }
     }
 }

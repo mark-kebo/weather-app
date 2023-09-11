@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 protocol APIRequestServiceProtocol: AnyObject {
-    func sendAPIRequest<T: Decodable>(webService: WebService, _: T.Type) -> AnyPublisher<APIResponse<T>, ActionError>
+    func sendAPIRequest<T: Decodable>(webService: WebService, _: T.Type) -> AnyPublisher<T, ActionError>
 }
 
 final class APIRequestService: APIRequestServiceProtocol {
@@ -23,7 +23,7 @@ final class APIRequestService: APIRequestServiceProtocol {
         self.responseHandler = responseHandler
     }
 
-    func sendAPIRequest<T: Decodable>(webService: WebService, _: T.Type) -> AnyPublisher<APIResponse<T>, ActionError> {
+    func sendAPIRequest<T: Decodable>(webService: WebService, _: T.Type) -> AnyPublisher<T, ActionError> {
         guard let requestAbsoluteURL = requestFactory.requestAbsoluteURL(webService: webService) else {
             let errorMessage = "Can't create API request"
             NSLog(errorMessage)
@@ -35,7 +35,7 @@ final class APIRequestService: APIRequestServiceProtocol {
         return URLSession.shared.dataTaskPublisher(for: requestAbsoluteURL)
             .tryMap { [weak self] data, response in
                 guard let self else { throw ActionError.objectParsing() }
-                let parsedResults = self.responseHandler.parsedResponse(data: data) as Result<APIResponse<T>, ActionError>
+                let parsedResults = self.responseHandler.parsedResponse(data: data) as Result<T, ActionError>
                 NSLog("API Response parsed successfully for \(T.self)")
                 switch parsedResults {
                 case .success(let apiResponse):

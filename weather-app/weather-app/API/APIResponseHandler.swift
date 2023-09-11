@@ -8,12 +8,12 @@
 import Foundation
 
 protocol APIResponseHandlerProtocol: AnyObject {
-    func parsedResponse<T: Decodable>(data: Data) -> Result<APIResponse<T>, ActionError>
+    func parsedResponse<T: Decodable>(data: Data) -> Result<T, ActionError>
 }
 
 final class APIResponseHandler: APIResponseHandlerProtocol {
-    func parsedResponse<T: Decodable>(data: Data) -> Result<APIResponse<T>, ActionError> {
-        let parsedResponseData = data.decoded() as Result<APIResponse<T>, ActionError>
+    func parsedResponse<T: Decodable>(data: Data) -> Result<T, ActionError> {
+        let parsedResponseData = data.decoded() as Result<T, ActionError>
         switch parsedResponseData {
         case .success(let apiResponse):
             return .success(apiResponse)

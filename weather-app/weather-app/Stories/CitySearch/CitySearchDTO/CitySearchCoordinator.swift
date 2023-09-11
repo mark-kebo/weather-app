@@ -8,6 +8,7 @@
 import UIKit
 
 protocol CitySearchCoordinatorProtocol: ErrorableCoordinatorProtocol {
+    func navigateToCityDetails(with item: CitySearchItem)
 }
 
 
@@ -24,9 +25,13 @@ final class CitySearchCoordinator: CitySearchCoordinatorProtocol {
     
     func start() {
         let viewModel = CitySearchViewModel(coordinator: self)
-        let viewController = UINavigationController(rootViewController: CitySearchViewController(viewModel: viewModel))
+        let viewController = CitySearchViewController(viewModel: viewModel)
         rootNavigationController?.pushViewController(viewController, animated: true)
     }
     
-    
+    func navigateToCityDetails(with item: CitySearchItem) {
+        CityWeatherDetailsCoordinator(rootNavigationController: rootNavigationController,
+                                      city: item.details?.name ?? item.text,
+                                      details: item.details).start()
+    }
 }
