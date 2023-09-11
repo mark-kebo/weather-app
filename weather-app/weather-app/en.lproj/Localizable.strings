@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  weather-app
+
+  Created by Dima Worożbicki on 11/09/2023.
+  
+*/
+
+// MARK: - Stories
+
+"ScreenReloadButtonTitle" = "Try again";
+"ScreenEmptyMessage" = "Empty data";
+
+// MARK: - Errors
+
+"ErrorTitle" = "Error";
+"ActionClose" = "Close";
+"ErrorNetworkTitle" = "No internet connection";
+"ErrorNetworkMessage" = "Please check you connection and try again.";
+"GlobalUnexpectableErrorTitle" = "An unexpected error has occurred. Please try again later.";
+"ErrorObjectParcing" = "Object handling error.";
+"ErrorTimeout" = "Timeout. Please try again later.";
