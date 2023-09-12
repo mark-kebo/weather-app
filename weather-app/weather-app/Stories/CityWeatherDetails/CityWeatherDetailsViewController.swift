@@ -10,7 +10,8 @@ import UIKit
 final class CityWeatherDetailsViewController: UIViewController {
     @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var tableView: UITableView!
-    
+    private let refreshControl = UIRefreshControl()
+
     private let viewModel: CityWeatherDetailsViewModelProtocol
     
     init(viewModel: CityWeatherDetailsViewModelProtocol) {
@@ -36,10 +37,17 @@ final class CityWeatherDetailsViewController: UIViewController {
                            forCellReuseIdentifier: CityWeatherDetailsMainTableViewCell.nibName)
         tableView.register(UINib(nibName: CityWeatherDetailsForecastTableViewCell.nibName, bundle: nil),
                            forCellReuseIdentifier: CityWeatherDetailsForecastTableViewCell.nibName)
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(updateViewData(_:)), for: .valueChanged)
         loadingIndicator.startAnimating()
+        updateViewData(nil)
+    }
+    
+    @objc private func updateViewData(_ sender: Any?) {
         Task {
             await viewModel.updateData()
             loadingIndicator.stopAnimating()
+            self.refreshControl.endRefreshing()
             tableView.reloadData()
         }
     }
