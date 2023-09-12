@@ -53,7 +53,7 @@ final class CitySearchViewModel<Coordinator>: CitySearchViewModelProtocol where 
     
     func getViewData(for searchText: String) {
         NSLog("Get weather data for: \(searchText)")
-        apiService.sendAPIRequest(webService: .getWeather(city: searchText), WeatherDetail.self)
+        apiService.sendAPIRequest(webService: .getWeather(city: searchText, endpoint: .weather), WeatherDetail.self)
         .sink { [weak self] completion in
             switch completion {
             case .finished: break

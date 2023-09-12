@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CitySearchViewController: UIViewController  {
+final class CitySearchViewController: UIViewController {
     
     @IBOutlet private weak var searchField: SearchField!
     @IBOutlet private weak var tableView: UITableView!
@@ -85,6 +85,7 @@ extension CitySearchViewController: UITableViewDataSource {
 extension CitySearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NSLog("Cell selected: \(indexPath)")
+        tableView.deselectRow(at: indexPath, animated: true)
         viewModel.prepareSearchDetails(for: indexPath)
     }
     

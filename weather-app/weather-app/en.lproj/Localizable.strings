@@ -13,6 +13,10 @@
 "SearchPlaceholder" = "Search...";
 "CitySectionHeader" = "Found city";
 "LastCitySectionHeader" = "Latest cities";
+"CityWeatherPressure" = "Pressure: ";
+"CityWeatherHumidity" = "Humidity: ";
+"CityWeatherWindSpeed" = "Wind speed: ";
+"CityWeatherVisibility" = "Visibility: ";
 "CitySearchTitle" = "City search";
 
 // MARK: - Errors

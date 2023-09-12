@@ -21,7 +21,7 @@ struct CitySearchItem {
         self.text = weatherDetail.name ?? ""
         self.details = weatherDetail
         guard let temp = weatherDetail.main?.temp else { return }
-        self.text += ": \(temp) °C"
+        self.text += ": \(temp)°"
     }
     
     init?(id: Int?, city: String?) {

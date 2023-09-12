@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol CityWeatherDetailsCoordinatorProtocol: CoordinatorProtocol {}
+protocol CityWeatherDetailsCoordinatorProtocol: ErrorableCoordinatorProtocol {}
 
 final class CityWeatherDetailsCoordinator: CityWeatherDetailsCoordinatorProtocol {
     private let city: String, details: WeatherDetail?
