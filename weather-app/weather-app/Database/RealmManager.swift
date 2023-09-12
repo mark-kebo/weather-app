@@ -12,7 +12,7 @@ import RealmSwift
 protocol RealmManagerProtocol: AnyObject {
     func create<T: Object>(_ object: T)
     func delete<T: Object>(_ object: T)
-    func readAllOfType<T: Object>(_ objectType: T.Type) -> Results<T>?
+    func readAllOfType<T: Object>(_ objectType: T.Type) -> [T]?
 }
 
 final class RealmManager: RealmManagerProtocol {
@@ -41,10 +41,10 @@ final class RealmManager: RealmManagerProtocol {
         }
     }
     
-    func readAllOfType<T: Object>(_ objectType: T.Type) -> Results<T>? {
+    func readAllOfType<T: Object>(_ objectType: T.Type) -> [T]? {
         do {
             let realm = try Realm()
-            return realm.objects(objectType.self)
+            return Array(realm.objects(objectType.self))
         } catch (let error) {
             let errorMessage = "Can't read Objects from DB: \(error.localizedDescription)"
             NSLog(errorMessage)
