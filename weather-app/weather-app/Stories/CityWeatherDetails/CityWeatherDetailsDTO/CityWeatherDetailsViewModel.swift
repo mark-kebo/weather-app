@@ -34,7 +34,6 @@ final class CityWeatherDetailsViewModel<Coordinator>: CityWeatherDetailsViewMode
         self.apiService = apiService
         self.title = city
         self.details = CityWeatherDetailsItem(isForecast: false, details: details)
-        self.forecastViewData = [CityWeatherDetailsItem(isForecast: true, details: details), CityWeatherDetailsItem(isForecast: true, details: details)]
     }
     
     func updateData() async {
